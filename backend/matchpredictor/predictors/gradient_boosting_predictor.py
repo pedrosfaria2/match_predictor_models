@@ -1,17 +1,17 @@
-from typing import List, Tuple, Optional, cast
-
+from sklearn.ensemble import GradientBoostingClassifier
+from typing import List, Tuple, Optional
 import numpy as np
 from numpy import float64
 from numpy.typing import NDArray
-from sklearn.linear_model import LogisticRegression
+
 from sklearn.preprocessing import OneHotEncoder
 
 from matchpredictor.matchresults.result import Fixture, Outcome, Result, Team
 from matchpredictor.predictors.predictor import Predictor, Prediction
 
 
-class LinearRegressionPredictor(Predictor):
-    def __init__(self, model: LogisticRegression, team_encoding: OneHotEncoder) -> None:
+class GradientBoostingPredictor(Predictor):
+    def __init__(self, model: GradientBoostingClassifier, team_encoding: OneHotEncoder) -> None:
         self.model = model
         self.team_encoding = team_encoding
 
@@ -42,7 +42,7 @@ class LinearRegressionPredictor(Predictor):
             return None
 
 
-def build_model(results: List[Result]) -> Tuple[LogisticRegression, OneHotEncoder]:
+def build_model(results: List[Result]) -> Tuple[GradientBoostingClassifier, OneHotEncoder]:
     home_names = np.array([r.fixture.home_team.name for r in results])
     away_names = np.array([r.fixture.away_team.name for r in results])
     home_goals = np.array([r.home_goals for r in results])
@@ -57,13 +57,13 @@ def build_model(results: List[Result]) -> Tuple[LogisticRegression, OneHotEncode
     x: NDArray[float64] = np.concatenate([encoded_home_names, encoded_away_names], 1)
     y = np.sign(home_goals - away_goals)
 
-    model = LogisticRegression(penalty="l2", fit_intercept=False, multi_class="ovr", C=1)
+    model = GradientBoostingClassifier(n_estimators=100, random_state=42)
     model.fit(x, y)
 
     return model, team_encoding
 
 
-def train_regression_predictor(results: List[Result]) -> Predictor:
+def train_gradient_boosting_predictor(results: List[Result]) -> Predictor:
     model, team_encoding = build_model(results)
 
-    return LinearRegressionPredictor(model, team_encoding)
+    return GradientBoostingPredictor(model, team_encoding)
