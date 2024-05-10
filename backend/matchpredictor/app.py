@@ -34,8 +34,8 @@ def build_model_provider(training_data: List[Result]) -> ModelProvider:
         Model("Full simulator", train_offense_and_defense_predictor(training_data, 10_000)),
         # The linear regression model uses scikit learn, so can cause issues on some machines
         # Model("Linear regression", train_regression_predictor(training_data))
-        Model("Random Forest Predictor", train_random_forest_predictor(training_data)),
-        Model("Gradient Boosting Predictor", train_gradient_boosting_predictor(training_data)),
+        # Model("Random Forest Predictor", train_random_forest_predictor(training_data)),
+        # Model("Gradient Boosting Predictor", train_gradient_boosting_predictor(training_data)),
         Model("SVM Predictor", train_svm_predictor(training_data)),
         Model("Alphabetical Order", AlphabeticalOrderPredictor()),
     ])

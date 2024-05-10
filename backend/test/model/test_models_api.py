@@ -36,8 +36,8 @@ class TestModelsApi(TestCase):
             {"name": "Full simulator (fast)", "predicts_in_progress": True},
             {"name": "Full simulator", "predicts_in_progress": True},
             # {"name": "Linear regression", "predicts_in_progress": False},
-            {"name": "Random Forest Predictor", "predicts_in_progress": False},
-            {"name": "Gradient Boosting Predictor", "predicts_in_progress": False},
+            # {"name": "Random Forest Predictor", "predicts_in_progress": False},
+            # {"name": "Gradient Boosting Predictor", "predicts_in_progress": False},
             {"name": "SVM Predictor", "predicts_in_progress": False},
             {"name": "Alphabetical Order", "predicts_in_progress": False},
         ]})
