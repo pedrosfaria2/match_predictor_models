@@ -14,6 +14,7 @@ from matchpredictor.predictors.home_predictor import HomePredictor
 from matchpredictor.predictors.svm_predictor import train_svm_predictor
 from matchpredictor.predictors.random_forest_predictor import train_random_forest_predictor
 from matchpredictor.predictors.gradient_boosting_predictor import train_gradient_boosting_predictor
+from matchpredictor.predictors.alphabetical_order_predictor import AlphabeticalOrderPredictor
 from matchpredictor.predictors.linear_regression_predictor import train_regression_predictor
 from matchpredictor.predictors.past_results_predictor import train_results_predictor
 from matchpredictor.predictors.simulation_predictor import train_offense_and_defense_predictor, train_offense_predictor
@@ -36,6 +37,7 @@ def build_model_provider(training_data: List[Result]) -> ModelProvider:
         Model("Random Forest Predictor", train_random_forest_predictor(training_data)),
         Model("Gradient Boosting Predictor", train_gradient_boosting_predictor(training_data)),
         Model("SVM Predictor", train_svm_predictor(training_data)),
+        Model("Alphabetical Order", AlphabeticalOrderPredictor()),
     ])
 
 

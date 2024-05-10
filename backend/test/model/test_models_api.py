@@ -39,4 +39,5 @@ class TestModelsApi(TestCase):
             {"name": "Random Forest Predictor", "predicts_in_progress": False},
             {"name": "Gradient Boosting Predictor", "predicts_in_progress": False},
             {"name": "SVM Predictor", "predicts_in_progress": False},
+            {"name": "Alphabetical Order", "predicts_in_progress": False},
         ]})
