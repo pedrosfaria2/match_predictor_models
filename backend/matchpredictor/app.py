@@ -11,6 +11,7 @@ from matchpredictor.matchresults.results_provider import training_results
 from matchpredictor.model.model_provider import ModelProvider, Model
 from matchpredictor.model.models_api import models_api
 from matchpredictor.predictors.home_predictor import HomePredictor
+from matchpredictor.predictors.svm_predictor import train_svm_predictor
 from matchpredictor.predictors.random_forest_predictor import train_random_forest_predictor
 from matchpredictor.predictors.gradient_boosting_predictor import train_gradient_boosting_predictor
 from matchpredictor.predictors.linear_regression_predictor import train_regression_predictor
@@ -34,6 +35,7 @@ def build_model_provider(training_data: List[Result]) -> ModelProvider:
         # Model("Linear regression", train_regression_predictor(training_data))
         Model("Random Forest Predictor", train_random_forest_predictor(training_data)),
         Model("Gradient Boosting Predictor", train_gradient_boosting_predictor(training_data)),
+        Model("SVM Predictor", train_svm_predictor(training_data)),
     ])
 
 
